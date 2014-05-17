@@ -25,3 +25,6 @@ function LL_max () {
       render();
 }
 
+$(function() {
+  LL_max();
+});
