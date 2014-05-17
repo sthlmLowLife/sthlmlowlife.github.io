@@ -28,7 +28,7 @@ border-bottom: 1px solid #222;
     font-style: normal;
 }
 
-canvas:nth-of-type(2)
+canvas:nth-of-type(1)
 {
 float: right;
 }

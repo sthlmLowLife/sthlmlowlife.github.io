@@ -20,7 +20,7 @@
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
-				camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 15000 );
+				camera = new THREE.PerspectiveCamera( 40, (window.innerWidth/2) / window.innerHeight, 1, 15000 );
 				camera.position.z = 3200;
 
 				scene = new THREE.Scene();
@@ -48,7 +48,7 @@
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setClearColor( 0xffffff );
-				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.setSize( (window.innerWidth/2), window.innerHeight );
 				renderer.sortObjects = false;
 				container.appendChild( renderer.domElement );
 
