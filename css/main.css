@@ -16,8 +16,6 @@ background: #111;
 border-bottom: 1px solid #222;
 }
 
-
-
 /*web-fonts*/
 @font-face {
     font-family: '8bitoperatorregular';
@@ -28,7 +26,6 @@ border-bottom: 1px solid #222;
          url('../fonts/8bitoperator-webfont.svg#8bitoperatorregular') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 

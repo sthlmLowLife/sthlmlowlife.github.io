@@ -21,13 +21,14 @@
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="js/vendor/jquery-1.11.0.min.js"></script>
         <script src="js/vendor/three-js/build/three.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <div class="navbar navbar-inverse navbar-fixed-top LL-menu" role="navigation">
+    <div class="LL-menu navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -44,30 +45,9 @@
     <!-- start -->
    
       <script>
-      var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-
-      var renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.body.appendChild(renderer.domElement);
-
-      var geometry = new THREE.CubeGeometry(1,1,1);
-      var material = new THREE.MeshBasicMaterial({color: 0x00ff00});
-      var cube = new THREE.Mesh(geometry, material);
-      scene.add(cube);
-
-      camera.position.z = 5;
-
-      var render = function () {
-        requestAnimationFrame(render);
-
-        cube.rotation.x += 0.1;
-        cube.rotation.y += 0.1;
-
-        renderer.render(scene, camera);
-      };
-
-      render();
+      $(function() {
+        LL_cube2();
+      });
       </script>
     
     <!-- start -->
