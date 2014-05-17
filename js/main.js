@@ -1,9 +1,9 @@
 function LL_cube () {
 	var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+      var camera = new THREE.PerspectiveCamera(75, (window.innerWidth/2)/window.innerHeight, 0.1, 1000);
 
       var renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize((window.innerWidth/2), window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
       var geometry = new THREE.CubeGeometry(1,1,1);
@@ -27,10 +27,10 @@ function LL_cube () {
 
 function LL_cube2 () {
 	var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+      var camera = new THREE.PerspectiveCamera(75, (window.innerWidth/2)/window.innerHeight, 0.1, 1000);
 
       var renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize((window.innerWidth/2), window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
       var geometry = new THREE.CubeGeometry(1,1,1);
@@ -38,7 +38,7 @@ function LL_cube2 () {
       var cube = new THREE.Mesh(geometry, material);
       scene.add(cube);
 
-      camera.position.z = 1;
+      camera.position.z = 2;
 
       var render = function () {
         requestAnimationFrame(render);
@@ -51,3 +51,4 @@ function LL_cube2 () {
 
       render();
 }
+
