@@ -1,4 +1,4 @@
-function LL_cube () {
+function LL_william () {
 	var scene = new THREE.Scene();
       var camera = new THREE.PerspectiveCamera(75, (window.innerWidth/2)/window.innerHeight, 0.1, 1000);
 
@@ -25,7 +25,7 @@ function LL_cube () {
       render();
 }
 
-function LL_cube2 () {
+function LL_max () {
 	var scene = new THREE.Scene();
       var camera = new THREE.PerspectiveCamera(75, (window.innerWidth/2)/window.innerHeight, 0.1, 1000);
 
