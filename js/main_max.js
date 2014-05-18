@@ -35,8 +35,8 @@ $.when(
         container = document.createElement( 'div' );
         document.body.appendChild( container );
 
-        camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
-        camera.position.z = 100;
+        camera = new THREE.PerspectiveCamera( 2, window.innerWidth / window.innerHeight, 1, 2000 );
+        camera.position.z = 200;
 
         // scene
 
@@ -71,7 +71,8 @@ $.when(
         // model
 
         var loader = new THREE.OBJLoader( manager );
-        loader.load( '/js/vendor/three-js/examples/obj/male02/male02.obj', function ( object ) {
+      //  loader.load( '/js/vendor/three-js/examples/obj/male02/male02.obj', function ( object ) {
+        loader.load( '/obj/star_wars.obj', function ( object ) {
 
             object.traverse( function ( child ) {
 
@@ -83,7 +84,7 @@ $.when(
 
             } );
 
-            object.position.y = - 80;
+            object.position.y = 0;
             scene.add( object );
 
         } );
@@ -116,8 +117,8 @@ $.when(
 
     function onDocumentMouseMove( event ) {
 
-        mouseX = ( event.clientX - windowHalfX ) / 2;
-        mouseY = ( event.clientY - windowHalfY ) / 2;
+        mouseX = ( event.clientX - windowHalfX ) / 4;
+        mouseY = ( event.clientY - windowHalfY ) / 4;
 
     }
 
