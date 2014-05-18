@@ -3,6 +3,19 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+   
+/* -- web-fonts -- */
+@font-face {
+    font-family: '8bitoperatorregular';
+    src: url('../fonts/8bitoperator-webfont.eot');
+    src: url('../fonts/8bitoperator-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/8bitoperator-webfont.woff') format('woff'),
+         url('../fonts/8bitoperator-webfont.ttf') format('truetype'),
+         url('../fonts/8bitoperator-webfont.svg#8bitoperatorregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/* -- web-fonts -- */
 
 body{
 	padding: 0;
@@ -16,19 +29,16 @@ background: #111;
 border-bottom: 1px solid #222;
 }
 
-/*web-fonts*/
-@font-face {
-    font-family: '8bitoperatorregular';
-    src: url('../fonts/8bitoperator-webfont.eot');
-    src: url('../fonts/8bitoperator-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/8bitoperator-webfont.woff') format('woff'),
-         url('../fonts/8bitoperator-webfont.ttf') format('truetype'),
-         url('../fonts/8bitoperator-webfont.svg#8bitoperatorregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+iframe{
+width: 50%;
+position: absolute;
+height: 100%;
+border: 0;
+margin: 0;
+padding: 0;
+overflow: hidden;
 }
-
-canvas:nth-of-type(1)
+iframe:nth-of-type(2)
 {
-float: right;
+right:0;
 }
