@@ -5,6 +5,7 @@ $.when(
     $.getScript( "/js/vendor/three-js/build/three.min.js" ),
     $.getScript( "/js/vendor/three-js/examples/js/libs/stats.min.js" ),
     $.getScript( "/js/vendor/three-js/examples/js/Detector.js" ),
+    $.getScript( "/js/vendor/three-js/examples/js/loaders/OBJLoader.js" ),
     $.Deferred(function( deferred ){
         $( deferred.resolve );
     })
@@ -15,140 +16,96 @@ $.when(
     // ======== SCRIPTS LOADED - START
     // ================================
 
-    if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+    var container, stats;
 
     var camera, scene, renderer;
-    var meshes = [];
+
+    var mouseX = 0, mouseY = 0;
+
+    var windowHalfX = window.innerWidth / 2;
+    var windowHalfY = window.innerHeight / 2;
+
 
     init();
-    animate();  
+    animate();
 
 
     function init() {
 
-        camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 2000 );
-        camera.position.z = 1000;
+        container = document.createElement( 'div' );
+        document.body.appendChild( container );
+
+        camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+        camera.position.z = 100;
+
+        // scene
 
         scene = new THREE.Scene();
 
-        geometry = new THREE.BoxGeometry( 200, 200, 200 );
+        var ambient = new THREE.AmbientLight( 0x101030 );
+        scene.add( ambient );
 
-        /*
-        This is how compressed textures are supposed to be used:
+        var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+        directionalLight.position.set( 0, 0, 1 );
+        scene.add( directionalLight );
 
-        DXT1 - RGB - opaque textures
-        DXT3 - RGBA - transparent textures with sharp alpha transitions
-        DXT5 - RGBA - transparent textures with full alpha range
-        */
-                                    
-        var map1 = THREE.ImageUtils.loadDDSTexture( '../js/vendor/three-js/textures/disturb_dxt1_nomip.dds' );
-        map1.minFilter = map1.magFilter = THREE.LinearFilter;
-        map1.anisotropy = 4;
+        // texture
 
-        var map2 = THREE.ImageUtils.loadDDSTexture( '../js/vendor/three-js/textures/disturb_dxt1_mip.dds' );
-        map2.anisotropy = 4;
+        var manager = new THREE.LoadingManager();
+        manager.onProgress = function ( item, loaded, total ) {
 
-        var map3 = THREE.ImageUtils.loadDDSTexture( '../js/vendor/three-js/textures/hepatica_dxt3_mip.dds' );
-        map3.anisotropy = 4;
+            console.log( item, loaded, total );
 
-        var map4 = THREE.ImageUtils.loadDDSTexture( '../js/vendor/three-js/textures/explosion_dxt5_mip.dds' );
-        map4.anisotropy = 4;
+        };
 
-        var map5 = THREE.ImageUtils.loadDDSTexture( '../js/vendor/three-js/textures/disturb_argb_nomip.dds' );
-        map5.minFilter = map5.magFilter = THREE.LinearFilter;
-        map5.anisotropy = 4;
+        var texture = new THREE.Texture();
 
-        var map6 = THREE.ImageUtils.loadDDSTexture( '../js/vendor/three-js/textures/disturb_argb_mip.dds' );
-        map6.anisotropy = 4;
+        var loader = new THREE.ImageLoader( manager );
+        loader.load( '/js/vendor/three-js/examples/textures/UV_Grid_Sm.jpg', function ( image ) {
 
-        var cubemap1 = THREE.ImageUtils.loadDDSTexture( '../js/vendor/three-js/textures/Mountains.dds', new THREE.CubeReflectionMapping, function( cubemap ) {
-            cubemap1.magFilter = cubemap1.minFilter = THREE.LinearFilter;
-            material1.needsUpdate = true;
+            texture.image = image;
+            texture.needsUpdate = true;
 
         } );
 
-        var cubemap2 = THREE.ImageUtils.loadDDSTexture( '../js/vendor/three-js/textures/Mountains_argb_mip.dds', new THREE.CubeReflectionMapping, function( cubemap ) {
-            cubemap2.magFilter = cubemap2.minFilter = THREE.LinearFilter;
-            material5.needsUpdate = true;
+        // model
+
+        var loader = new THREE.OBJLoader( manager );
+        loader.load( '/js/vendor/three-js/examples/obj/male02/male02.obj', function ( object ) {
+
+            object.traverse( function ( child ) {
+
+                if ( child instanceof THREE.Mesh ) {
+
+                    child.material.map = texture;
+
+                }
+
+            } );
+
+            object.position.y = - 80;
+            scene.add( object );
+
         } );
 
-        var cubemap3 = THREE.ImageUtils.loadDDSTexture( '../js/vendor/three-js/textures/Mountains_argb_nomip.dds', new THREE.CubeReflectionMapping, function( cubemap ) {
-            cubemap3.magFilter = cubemap3.minFilter = THREE.LinearFilter;
-            material6.needsUpdate = true;
-        } );
+        //
 
-
-        var material1 = new THREE.MeshBasicMaterial( { map: map1, envMap: cubemap1 } );
-        var material2 = new THREE.MeshBasicMaterial( { map: map2 } );
-        var material3 = new THREE.MeshBasicMaterial( { map: map3, alphaTest: 0.5, side: THREE.DoubleSide } );
-        var material4 = new THREE.MeshBasicMaterial( { map: map4, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthTest: false, transparent: true } );
-        var material5 = new THREE.MeshBasicMaterial( { envMap: cubemap2 } );
-        var material6 = new THREE.MeshBasicMaterial( { envMap: cubemap3 } );
-        var material7 = new THREE.MeshBasicMaterial( { map: map5 } );
-        var material8 = new THREE.MeshBasicMaterial( { map: map6 } );
-        
-
-        var mesh = new THREE.Mesh( new THREE.TorusGeometry( 100, 50, 32, 16 ), material1 );
-        mesh.position.x = -600;
-        mesh.position.y = -200;
-        scene.add( mesh );
-        meshes.push( mesh );
-
-        mesh = new THREE.Mesh( geometry, material2 );
-        mesh.position.x = -200;
-        mesh.position.y = -200;
-        scene.add( mesh );
-        meshes.push( mesh );
-
-        mesh = new THREE.Mesh( geometry, material3 );
-        mesh.position.x = -200;
-        mesh.position.y = 200;
-        scene.add( mesh );
-        meshes.push( mesh );
-
-        mesh = new THREE.Mesh( geometry, material4 );
-        mesh.position.x = -600;
-        mesh.position.y = 200;
-        scene.add( mesh );
-        meshes.push( mesh );
-
-        mesh = new THREE.Mesh( new THREE.BoxGeometry( 200, 200, 200 ), material5 );
-        mesh.position.x = 200;
-        mesh.position.y = 200;
-        scene.add( mesh );
-        meshes.push( mesh );
-
-        mesh = new THREE.Mesh( new THREE.BoxGeometry( 200, 200, 200 ), material6 );
-        mesh.position.x = 200;
-        mesh.position.y = -200;
-        scene.add( mesh );
-        meshes.push( mesh );
-
-        mesh = new THREE.Mesh( geometry, material7 );
-        mesh.position.x = 600;
-        mesh.position.y = -200;
-        scene.add( mesh );
-        meshes.push( mesh );
-
-        mesh = new THREE.Mesh( geometry, material8 );
-        mesh.position.x = 600;
-        mesh.position.y = 200;
-        scene.add( mesh );
-        meshes.push( mesh );
-
-
-        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer = new THREE.WebGLRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
-        document.body.appendChild( renderer.domElement );
+        container.appendChild( renderer.domElement );
 
-        stats = new Stats();
-        document.body.appendChild( stats.domElement );
+        document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+
+        //
 
         window.addEventListener( 'resize', onWindowResize, false );
 
     }
 
     function onWindowResize() {
+
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
 
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
@@ -157,24 +114,33 @@ $.when(
 
     }
 
+    function onDocumentMouseMove( event ) {
+
+        mouseX = ( event.clientX - windowHalfX ) / 2;
+        mouseY = ( event.clientY - windowHalfY ) / 2;
+
+    }
+
+    //
+
     function animate() {
 
         requestAnimationFrame( animate );
-
-        var time = Date.now() * 0.001;
-
-        for ( var i = 0; i < meshes.length; i ++ ) {
-
-            var mesh = meshes[ i ];
-            mesh.rotation.x = time;
-            mesh.rotation.y = time;
-
-        }
-
-        renderer.render( scene, camera );
-        stats.update();
+        render();
 
     }
+
+    function render() {
+
+        camera.position.x += ( mouseX - camera.position.x ) * .05;
+        camera.position.y += ( - mouseY - camera.position.y ) * .05;
+
+        camera.lookAt( scene.position );
+
+        renderer.render( scene, camera );
+
+    }
+
 
     // ================================
     // ======== SCRIPTS LOADED - START
