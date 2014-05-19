@@ -1,117 +1,128 @@
-				var container, stats;
+$.when(
+    // ================================
+    // ======== SCRIPTS 
+    // ================================
+    $.getScript( "http://experiment1/js/vendor/three-js/build/three.min.js" ),
+    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/libs/stats.min.js" ),
+    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/Detector.js" ),
+    // === controls
+    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/controls/TrackballControls.js" ),
+    // === loaders
+    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/MTLLoader.js" ),
+    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/OBJLoader.js" ),
+    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/OBJMTLLoader.js" ),
+    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/PDBLoader.js" ),
 
-				var camera, scene, renderer;
+    $.Deferred(function( deferred ){
+        $( deferred.resolve );
+    })
 
-				var mesh, geometry, sphere;
+).done(function(){
 
-				var mouseX = 0, mouseY = 0;
+	  // ================================
+    // ======== SCRIPTS LOADED - START
+    // ================================
+	var container, stats;
 
-				var windowHalfX = window.innerWidth / 2;
-				var windowHalfY = window.innerHeight / 2;
+			var camera, scene, renderer;
 
-				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			var mouseX = 0, mouseY = 0;
 
-				init();
-				animate();
+			var windowHalfX = window.innerWidth / 2;
+			var windowHalfY = window.innerHeight / 2;
 
 
-				function init() {
+			init();
+			animate();
 
-					container = document.createElement( 'div' );
-					document.body.appendChild( container );
 
-					camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 15000 );
-					camera.position.z = 3200;
+			function init() {
 
-					scene = new THREE.Scene();
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
 
-					sphere = new THREE.Mesh( new THREE.SphereGeometry( 100, 20, 20 ), new THREE.MeshNormalMaterial( { shading: THREE.SmoothShading } ) );
-					scene.add( sphere );
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera.position.z = 200;
 
-					var geometry = new THREE.CylinderGeometry( 0, 10, 100, 3 );
-					geometry.applyMatrix( new THREE.Matrix4().makeRotationFromEuler( new THREE.Euler( Math.PI / 2, Math.PI, 0 ) ) );
+				// scene
 
-					var material = new THREE.MeshNormalMaterial();
+				scene = new THREE.Scene();
 
-					for ( var i = 0; i < 1000; i ++ ) {
+				var ambient = new THREE.AmbientLight( 0x444444 );
+				scene.add( ambient );
 
-						var mesh = new THREE.Mesh( geometry, material );
-						mesh.position.x = Math.random() * 4000 - 2000;
-						mesh.position.y = Math.random() * 4000 - 2000;
-						mesh.position.z = Math.random() * 4000 - 2000;
-						mesh.scale.x = mesh.scale.y = mesh.scale.z = Math.random() * 4 + 2;
-						scene.add( mesh );
+				var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+				directionalLight.position.set( 0, 0, 1 ).normalize();
+				scene.add( directionalLight );
 
-					}
+				// model
 
-					scene.matrixAutoUpdate = false;
+				var loader = new THREE.OBJMTLLoader();
+				loader.load( 'http://experiment1/models/obj/weed/weed.obj', 'http://experiment1/models/obj/weed/weed.mtl', function ( object ) {
 
-					renderer = new THREE.WebGLRenderer( { antialias: true } );
-					renderer.setClearColor( 0xffffff );
-					renderer.setSize( window.innerWidth, window.innerHeight );
-					renderer.sortObjects = false;
-					container.appendChild( renderer.domElement );
+					object.position.y = 0;
+					object.position.x = -40;
+					object.rotation.y = 1000;
+					scene.add( object );
 
-					stats = new Stats();
-					stats.domElement.style.position = 'absolute';
-					stats.domElement.style.top = '0px';
-					stats.domElement.style.zIndex = 100;
-					container.appendChild( stats.domElement );
-
-					//
-
-					window.addEventListener( 'resize', onWindowResize, false );
-
-				}
-
-				function onWindowResize() {
-
-					windowHalfX = window.innerWidth / 2;
-					windowHalfY = window.innerHeight / 2;
-
-					camera.aspect = window.innerWidth / window.innerHeight;
-					camera.updateProjectionMatrix();
-
-					renderer.setSize( window.innerWidth, window.innerHeight );
-
-				}
-
-				function onDocumentMouseMove(event) {
-
-					mouseX = ( event.clientX - windowHalfX ) * 10;
-					mouseY = ( event.clientY - windowHalfY ) * 10;
-
-				}
+				} );
 
 				//
 
-				function animate() {
+				renderer = new THREE.WebGLRenderer();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.setClearColor(0xFFCC99, 1);
+				container.appendChild( renderer.domElement );
 
-					requestAnimationFrame( animate );
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
-					render();
-					stats.update();
+				//
 
-				}
+				window.addEventListener( 'resize', onWindowResize, false );
 
-				function render() {
+			}
 
-					var time = Date.now() * 0.0005;
+			function onWindowResize() {
 
-					sphere.position.x = Math.sin( time * 0.7 ) * 2000;
-					sphere.position.y = Math.cos( time * 0.5 ) * 2000;
-					sphere.position.z = Math.cos( time * 0.3 ) * 2000;
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
 
-					for ( var i = 1, l = scene.children.length; i < l; i ++ ) {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
 
-						scene.children[ i ].lookAt( sphere.position );
+				renderer.setSize( window.innerWidth, window.innerHeight );
 
-					}
+			}
 
-					camera.position.x += ( mouseX - camera.position.x ) * .05;
-					camera.position.y += ( - mouseY - camera.position.y ) * .05;
-					camera.lookAt( scene.position );
+			function onDocumentMouseMove( event ) {
 
-					renderer.render( scene, camera );
+				mouseX = ( event.clientX - windowHalfX ) / 5;
+				mouseY = ( event.clientY - windowHalfY ) / 5;
 
-				}
+			}
+
+			//
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+				render();
+
+			}
+
+			function render() {
+
+				camera.position.x += ( mouseX - camera.position.x ) * .05;
+				camera.position.y += ( - mouseY - camera.position.y ) * .05;
+
+				camera.lookAt( scene.position );
+
+				renderer.render( scene, camera );
+
+			}
+   
+    // ================================
+    // ======== SCRIPTS LOADED - START
+    // ================================
+
+});
