@@ -27,3 +27,27 @@ border-bottom: 1px solid #222;
     font-weight: normal;
     font-style: normal;
 }
+
+#menu{
+display: block;
+position: absolute;
+bottom: 20px;
+text-align: center;
+width: 100%;    
+}
+
+#menu button{
+border: none;
+background: #111;
+padding: 8px 15px;
+color: #eee;
+outline: none;
+display: inline-block;
+text-align: center;
+text-transform:lowercase;
+}
+#menu button.selected, #menu button:hover{
+background: #eee;
+color: #222
+}
+
