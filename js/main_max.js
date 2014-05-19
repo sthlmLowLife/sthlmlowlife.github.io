@@ -36,6 +36,7 @@ $.when(
 
     var list_of_models = [
 
+    ["max-1", "max/maxOno.obj","max/maxOno.mtl", 300],
     ["Female", "female02/female02.obj","female02/female02.mtl", 150],
     ["Male", "male02/male02.obj","male02/male02_dds.mtl", 150],
     ["Raptor", "raptor/Raptor.obj","raptor/Raptor.mtl", 150],
