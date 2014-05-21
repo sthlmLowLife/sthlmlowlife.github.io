@@ -41,7 +41,8 @@ $.when(
     ["Male", "male02/male02.obj","male02/male02_dds.mtl", 150],
     ["Raptor", "raptor/Raptor.obj","raptor/Raptor.mtl", 150],
     ["Altair", "Altair/altair.obj","Altair/star_wars.mtl", 150],
-    ["Armchair", "Armchair/Armchair.obj","Armchair/Armchair.mtl", 300]
+    ["Armchair", "Armchair/Armchair.obj","Armchair/Armchair.mtl", 300],
+    ["Boat", "boat/boat.obj","boat/boat.mtl", 300]
 
     ];
 
