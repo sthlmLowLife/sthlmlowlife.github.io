@@ -9,6 +9,10 @@ $.when(
     $.getScript( "http://experiment1/js/vendor/three-js/examples/js/controls/TrackballControls.js" ),
     // === loaders
     $.getScript( "http://experiment1/js/vendor/three-js/examples/js/controls/PointerLockControls.js" ),
+        $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/MTLLoader.js" ),
+    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/OBJLoader.js" ),
+    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/OBJMTLLoader.js" ),
+    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/PDBLoader.js" ),
 
     $.Deferred(function( deferred ){
         $( deferred.resolve );
@@ -149,27 +153,34 @@ var camera, scene, renderer;
 				for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
 
 					var vertex = geometry.vertices[ i ];
-					vertex.x += Math.random() * 20 - 10;
-					vertex.y += Math.random() * 2;
-					vertex.z += Math.random() * 20 - 10;
 
 				}
 
+//floor material
 				for ( var i = 0, l = geometry.faces.length; i < l; i ++ ) {
 
 					var face = geometry.faces[ i ];
-					face.vertexColors[ 0 ] = new THREE.Color().setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-					face.vertexColors[ 1 ] = new THREE.Color().setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-					face.vertexColors[ 2 ] = new THREE.Color().setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-
 				}
 
-				material = new THREE.MeshBasicMaterial( { vertexColors: THREE.VertexColors } );
+//floor material
+				material = new THREE.MeshBasicMaterial( { color: 0x00ffff, wireframe: true  } );
 
 				mesh = new THREE.Mesh( geometry, material );
 				scene.add( mesh );
 
 				// objects
+
+
+	var loader = new THREE.OBJMTLLoader();
+				loader.load( 'http://experiment1/models/obj/weed/weed.obj', 'http://experiment1/models/obj/weed/weed.mtl', function ( object ) {
+
+					object.position.y = 0;
+					object.position.x = -40;
+					object.rotation.y = 1000;
+					scene.add( object );
+
+				} );
+
 
 				geometry = new THREE.BoxGeometry( 20, 20, 20 );
 
