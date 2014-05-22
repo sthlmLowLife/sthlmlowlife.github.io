@@ -28,7 +28,8 @@
     font-style: normal;
 }
 
-#menu{
+#menu
+{
     display: block;
     position: absolute;
     bottom: 20px;
@@ -36,7 +37,8 @@
     width: 100%;    
 }
 
-#menu button{
+#menu button
+{
     border: none;
     background: #111;
     padding: 8px 15px;
@@ -51,15 +53,42 @@
     color: #222
 }
 
-#blocker{
+#blocker
+{
     height: 100%;
     position: fixed;
     width: 100%;
     display: table;
-    background: rgba(255,255,255,.9);
+    background: rgba(0,0,0,.9);
+    color: #00ffff;
+    /*background: rgba(255,255,255,.9);*/
 }
-#instructions{
+#instructions
+{
     display: table-cell;
     vertical-align: middle;
     text-align: center;
 }
+#stats{ width: 154px !important; }
+#fpsText{ font-family: '8bitoperatorregular' !important; }
+#fpsGraph{width: 148px !important;}
+#fpsGraph span{width: 2px !important;}
+
+.debug
+{
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #000;
+    color: #00ffff;
+    z-index: 99999;
+    padding: 5px;
+    font-size: .8em;
+}
+.debug p
+{
+    margin: 0;
+    text-align: right;
+}
+.debug.active{opacity: 1}
