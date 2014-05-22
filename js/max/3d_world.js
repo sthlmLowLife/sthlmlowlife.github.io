@@ -12,7 +12,7 @@ $.when(
     // $.getScript( "/js/vendor/three-js/examples/js/controls/TrackballControls.js" ),
 
     // === loaders
-    $.getScript( "/js/vendor/three-js/examples/js/controls/PointerLockControls.js" ),
+    $.getScript( "/js/max/3d_world_controls.js" ),
     $.getScript( "/js/vendor/three-js/examples/js/loaders/MTLLoader.js" ),
     $.getScript( "/js/vendor/three-js/examples/js/loaders/OBJLoader.js" ),
     $.getScript( "/js/vendor/three-js/examples/js/loaders/OBJMTLLoader.js" ),
@@ -201,7 +201,7 @@ $.when(
 			$('.debug').append("<p> "+ray.ray.origin.x+" : x</p>");
 			$('.debug').append("<p> "+ray.ray.origin.y+" : y</p>");
 			$('.debug').append("<p> "+ray.ray.origin.z+" : z</p>");
-			console.log(ray);
+			console.log(controls);
 		}
 	}
 
