@@ -150,7 +150,7 @@ $.when(
         var halfExtents = new CANNON.Vec3(1,1,1);
         var boxShape = new CANNON.Box(halfExtents);
         var boxGeometry = new THREE.CubeGeometry(halfExtents.x*2,halfExtents.y*2,halfExtents.z*2);
-        for(var i=0; i<10; i++){
+        for(var i=0; i<20; i++){
             var x = (Math.random()-0.5)*10;
             var y = (Math.random())*20;
             var z = (Math.random()-0.5)*10;
@@ -167,7 +167,6 @@ $.when(
             boxMeshes.push(boxMesh);
         }
 
-
         // Add linked boxes
         var size = 0.5;
         var he = new CANNON.Vec3(size,size,size*0.1);
@@ -175,7 +174,12 @@ $.when(
         var mass = 0;
         var space = 0.1*size;
         var N=5, last;
-        var boxGeometry = new THREE.CubeGeometry(he.x*2,he.y*2,he.z*2);
+
+        var radius = 1;
+		var segments = 2;
+
+		var boxGeometry = new THREE.CircleGeometry( radius, segments );
+        // var boxGeometry = new THREE.CubeGeometry(he.x*2,he.y*2,he.z*2);
         for(var i=0; i<N; i++){
             var boxbody = new CANNON.RigidBody(mass,boxShape);
             var boxMesh = new THREE.Mesh( boxGeometry, material );
