@@ -1,4 +1,4 @@
-# sthlmLowLifes - WebGl project
+# sthlmLowLifes - WebGL project
 
 ##libraries being experimented with:
 
