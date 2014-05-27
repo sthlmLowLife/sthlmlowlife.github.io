@@ -2,17 +2,17 @@ $.when(
     // ================================
     // ======== SCRIPTS 
     // ================================
-    $.getScript( "http://experiment1/js/vendor/three-js/build/three.min.js" ),
-    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/libs/stats.min.js" ),
-    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/Detector.js" ),
+    $.getScript( "/js/vendor/three-js/build/three.min.js" ),
+    $.getScript( "/js/vendor/three-js/examples/js/libs/stats.min.js" ),
+    $.getScript( "/js/vendor/three-js/examples/js/Detector.js" ),
     // === controls
-    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/controls/TrackballControls.js" ),
+    $.getScript( "/js/vendor/three-js/examples/js/controls/TrackballControls.js" ),
     // === loaders
-    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/controls/PointerLockControls.js" ),
+    $.getScript( "/js/vendor/three-js/examples/js/controls/PointerLockControls.js" ),
         $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/MTLLoader.js" ),
-    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/OBJLoader.js" ),
-    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/OBJMTLLoader.js" ),
-    $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/PDBLoader.js" ),
+    $.getScript( "/js/vendor/three-js/examples/js/loaders/OBJLoader.js" ),
+    $.getScript( "/js/vendor/three-js/examples/js/loaders/OBJMTLLoader.js" ),
+    $.getScript( "/js/vendor/three-js/examples/js/loaders/PDBLoader.js" ),
 
     $.Deferred(function( deferred ){
         $( deferred.resolve );
@@ -172,7 +172,7 @@ var camera, scene, renderer;
 
 
 	var loader = new THREE.OBJMTLLoader();
-				loader.load( 'http://experiment1/models/obj/weed/weed.obj', 'http://experiment1/models/obj/weed/weed.mtl', function ( object ) {
+				loader.load( '/models/obj/weed/weed.obj', '/models/obj/weed/weed.mtl', function ( object ) {
 
 					object.position.y = 0;
 					object.position.x = -40;
