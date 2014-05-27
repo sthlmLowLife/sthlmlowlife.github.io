@@ -1,8 +1,6 @@
-# sthlmLowLifes - experiment 1
+# sthlmLowLifes - WebGl project
 
-## WebGl project
-
-libraries being tested:
+##libraries being experimented with:
 
 * three.js
 * canon.js

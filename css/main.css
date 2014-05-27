@@ -4,7 +4,7 @@
    Author's custom styles
    ========================================================================== */
    
-/* === web-fonts */
+   /* === web-fonts */
 
    @font-face {
     font-family: '8bitoperatorregular';
@@ -19,22 +19,21 @@
 
 /* === web-fonts */
 
-body
-{
+body{
 	padding: 0;
 	margin: 0;
 	background: #000;
 	font-family: '8bitoperatorregular';
+    font-size: 14px;
 }
 
-.LL-menu
-{
+.LL-menu{
     background: #111;
     border-bottom: 1px solid #222;
+    padding: 15px;
 }
 
-iframe
-{
+iframe{
     width: 50%;
     position: absolute;
     height: 100%;
@@ -44,17 +43,37 @@ iframe
     overflow: hidden;
 }
 
-iframe:nth-of-type(2)
-{
+.navbar-brand{
+    padding:0;
+}
+
+iframe:nth-of-type(2){
     right:0;
 }
 
-iframe .navbar-header
-{
-display: none;
+iframe .navbar-header{
+    display: none;
 }
 
-.LL-menu-item
-{
+.LL-menu-item{
     float: right;
+    font-size: 1.2em;
+    color: #999;
+}
+
+.LL-menu-item.home{
+    float: left;
+}
+
+a.LL-menu-item:hover{
+    color: #fff;
+    text-decoration: none;    
+}
+
+.LL-menu-item:hover:before{
+    color: #999;
+}
+
+span.LL-menu-item{
+    padding: 0 15px;
 }
