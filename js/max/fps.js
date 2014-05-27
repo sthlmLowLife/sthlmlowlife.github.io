@@ -4,9 +4,9 @@ $.when(
     // ================================
 
     // === init
-    $.getScript( "/js/vendor/three-js/examples/js/libs/stats.min.js" ),
-    $.getScript( "/js/vendor/cannon.min.js" ),
-    $.getScript( "/js/max/fps/fps-controls.js" ),
+    $.getScript( "../../../js/vendor/three-js/examples/js/libs/stats.min.js" ),
+    $.getScript( "../../../js/vendor/cannon.min.js" ),
+    $.getScript( "../../../js/max/fps/fps-controls.js" ),
     // $.getScript( "/js/vendor/three-js/examples/js/Detector.js" ),
 
     // === controls

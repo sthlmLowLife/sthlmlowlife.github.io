@@ -12,7 +12,7 @@ $.when(
     // $.getScript( "/js/vendor/three-js/examples/js/controls/TrackballControls.js" ),
 
     // === loaders
-    $.getScript( "/js/max/3d_world_controls.js" ),
+    $.getScript( "/js/max/3d_world/3d_world_controls.js" ),
     $.getScript( "/js/vendor/three-js/examples/js/loaders/MTLLoader.js" ),
     $.getScript( "/js/vendor/three-js/examples/js/loaders/OBJLoader.js" ),
     $.getScript( "/js/vendor/three-js/examples/js/loaders/OBJMTLLoader.js" ),
@@ -93,7 +93,7 @@ $.when(
 		// === OBJ MODELS - START
 
 		var loader = new THREE.OBJMTLLoader();
-		loader.load( '../models/obj/Armchair/Armchair.obj', '../models/obj/Armchair/Armchair.mtl', function ( object ) {
+		loader.load( '../../../models/obj/Armchair/Armchair.obj', '../../../models/obj/Armchair/Armchair.mtl', function ( object ) {
 
 			object.position.y = 0;
 			object.position.x = 0;
@@ -104,7 +104,7 @@ $.when(
 		} );
 
 		var loader = new THREE.OBJMTLLoader();
-		loader.load( '../models/obj/boat/boat.obj', '../models/obj/boat/boat.mtl', function ( object ) {
+		loader.load( '../../../models/obj/boat/boat.obj', '../../../models/obj/boat/boat.mtl', function ( object ) {
 
 			object.position.y = 40;
 			object.position.x = 0;
