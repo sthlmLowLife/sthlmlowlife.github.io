@@ -77,7 +77,7 @@ $.when(
         var mass = 5, radius = 1.3;
         sphereShape = new CANNON.Sphere(radius);
         sphereBody = new CANNON.RigidBody(mass,sphereShape,physicsMaterial);
-        sphereBody.position.set(0,5,0);
+        sphereBody.position.set(0,5,20);
         sphereBody.linearDamping = 0.05;
         world.add(sphereBody);
 
@@ -147,24 +147,32 @@ $.when(
         window.addEventListener( 'resize', onWindowResize, false );
 
         // Add boxes
-        var halfExtents = new CANNON.Vec3(1,1,1);
+        var halfExtents = new CANNON.Vec3(.5,.5,.5);
+        console.log(halfExtents.y);
         var boxShape = new CANNON.Box(halfExtents);
         var boxGeometry = new THREE.CubeGeometry(halfExtents.x*2,halfExtents.y*2,halfExtents.z*2);
-        for(var i=0; i<20; i++){
-            var x = (Math.random()-0.5)*10;
-            var y = (Math.random())*20;
-            var z = (Math.random()-0.5)*10;
-            var boxBody = new CANNON.RigidBody(5,boxShape);
-            var boxMesh = new THREE.Mesh( boxGeometry, material );
-            world.add(boxBody);
-            scene.add(boxMesh);
-            boxBody.position.set(x,y,z);
-            boxMesh.position.set(x,y,z);
-            boxMesh.castShadow = true;
-            boxMesh.receiveShadow = true;
-            boxMesh.useQuaternion = true;
-            boxes.push(boxBody);
-            boxMeshes.push(boxMesh);
+        for(var y=0; y<3; y++){
+            for(var x=1; x<3; x++){
+                for(var z=1; z<3; z++){
+
+                    var xPos = (x)*(halfExtents.x + .5);
+                    var yPos = (y)*(halfExtents.y + .5);
+                    var zPos = (z)*(halfExtents.z + .5);
+                    var boxBody = new CANNON.RigidBody(1,boxShape);
+                    var boxMesh = new THREE.Mesh( boxGeometry, material );
+                    world.add(boxBody);
+                    scene.add(boxMesh);
+                    boxBody.position.set(xPos,yPos,zPos);
+                    boxMesh.position.set(xPos,yPos,zPos);
+                    boxMesh.castShadow = false;
+                    // boxMesh.castShadow = true;
+                    boxMesh.receiveShadow = true;
+                    boxMesh.useQuaternion = true;
+                    boxes.push(boxBody);
+                    boxMeshes.push(boxMesh);
+
+                }
+            }
         }
 
         // Add linked boxes
@@ -285,7 +293,8 @@ $.when(
                 ballMesh = new THREE.Mesh( ballGeometry, material_wireframe );
                 world.add(ballBody);
                 scene.add(ballMesh);
-                ballMesh.castShadow = true;
+                ballMesh.castShadow = false;
+                // ballMesh.castShadow = true;
                 ballMesh.receiveShadow = true;
                 balls.push(ballBody);
                 ballMeshes.push(ballMesh);
