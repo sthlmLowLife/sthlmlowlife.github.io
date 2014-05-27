@@ -9,7 +9,7 @@ $.when(
     $.getScript( "/js/vendor/three-js/examples/js/controls/TrackballControls.js" ),
     // === loaders
     $.getScript( "/js/vendor/three-js/examples/js/controls/PointerLockControls.js" ),
-        $.getScript( "http://experiment1/js/vendor/three-js/examples/js/loaders/MTLLoader.js" ),
+    $.getScript( "/js/vendor/three-js/examples/js/loaders/MTLLoader.js" ),
     $.getScript( "/js/vendor/three-js/examples/js/loaders/OBJLoader.js" ),
     $.getScript( "/js/vendor/three-js/examples/js/loaders/OBJMTLLoader.js" ),
     $.getScript( "/js/vendor/three-js/examples/js/loaders/PDBLoader.js" ),
