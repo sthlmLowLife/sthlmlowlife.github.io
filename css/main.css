@@ -27,12 +27,6 @@ body{
     font-size: 14px;
 }
 
-.LL-menu{
-    background: #111;
-    border-bottom: 1px solid #222;
-    padding: 15px;
-}
-
 iframe{
     width: 50%;
     position: absolute;
@@ -41,10 +35,7 @@ iframe{
     margin: 0;
     padding: 0;
     overflow: hidden;
-}
-
-.navbar-brand{
-    padding:0;
+    padding-top: 55px;
 }
 
 iframe:nth-of-type(2){
@@ -55,10 +46,26 @@ iframe .navbar-header{
     display: none;
 }
 
+.LL-menu{
+    background: #111;
+    border-bottom: 1px solid #222;
+    padding: 0 15px;
+    display: table;
+    margin: 0;
+    width: 100%;
+    height: 55px;
+}
+
+.LL-menu-item-container{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
 .LL-menu-item{
     float: right;
     font-size: 1.2em;
-    color: #999;
+    color: #aaa;
 }
 
 .LL-menu-item.home{
@@ -71,7 +78,7 @@ a.LL-menu-item:hover{
 }
 
 .LL-menu-item:hover:before{
-    color: #999;
+    color: #aaa;
 }
 
 span.LL-menu-item{
@@ -88,6 +95,7 @@ span.LL-menu-item{
     display: inline-block;
     text-align: center;
     padding: 20px;
+    position: relative;
 }
 
 .project-link span{
@@ -95,8 +103,16 @@ span.LL-menu-item{
     background: rgba(25, 45, 80, 0.5);
     width: 100%;
     height: 100px;
-    border: 1px solid #126474;
-    
+    border: 1px solid #00ffff;
+    position: relative;
+}
+
+.project-link span i.bg-dim{
+    position: absolute;
+    background: rgba(0,0,0,.5);
+    border: none;
+    width: 100%;
+    height: 100%;
 }
 
 .project-link span i{
@@ -106,8 +122,24 @@ span.LL-menu-item{
     font-style: normal;
     color: #fff;
     text-shadow: 2px 2px 0 #000;
+    position: relative;
+}
+
+.project-link:hover span i.bg-dim{
+    background: none;
 }
 
 .project-link:hover span i{
     opacity: 0;
+}
+
+a.home-link{
+    position: fixed;
+    top: 15px;
+    text-align: center;
+    color: #eee;
+}
+a.home-link:hover{
+color: #fff;
+text-shadow: 2px 2px 0 #000;
 }
